@@ -49,7 +49,8 @@ Response (JSON):
   id: string,
   codeFilePath: string,
   user: {
-    
+    id: string,
+    username: string
   }
 }
 ```
@@ -57,6 +58,7 @@ Response (JSON):
 ### Viewing The Feed
 
 Path: `GET /posts?page=<number>&limit=<number>`
+
 Response (JSON):
 ```
 {
@@ -75,6 +77,7 @@ Response (JSON):
 
 ### Liking A Post
 Path: `POST /posts/:id/likes`
+
 Response (JSON):
 ```
 {
