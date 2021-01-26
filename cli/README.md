@@ -2,6 +2,13 @@ This is the command line client for the application.
 
 ## The CLI API
 
+### Login
+`cli login`
+The user will receive a prompt for username and password
+
+### Logout
+`cli logout`
+
 ### Creating A Post
 `cli post <message> -f <filepath>`
 
