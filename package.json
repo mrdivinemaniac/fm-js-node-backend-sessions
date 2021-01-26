@@ -15,5 +15,8 @@
   "bugs": {
     "url": "https://github.com/mrdivinemaniac/fm-js-node-backend-sessions/issues"
   },
-  "homepage": "https://github.com/mrdivinemaniac/fm-js-node-backend-sessions#readme"
+  "homepage": "https://github.com/mrdivinemaniac/fm-js-node-backend-sessions#readme",
+  "dependencies": {
+    "express": "^4.17.1"
+  }
 }
