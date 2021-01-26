@@ -1,0 +1,19 @@
+{
+  "name": "fm-js-node-backend-sessions",
+  "version": "1.0.0",
+  "description": "",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/mrdivinemaniac/fm-js-node-backend-sessions.git"
+  },
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/mrdivinemaniac/fm-js-node-backend-sessions/issues"
+  },
+  "homepage": "https://github.com/mrdivinemaniac/fm-js-node-backend-sessions#readme"
+}
