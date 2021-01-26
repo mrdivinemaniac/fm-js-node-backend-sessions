@@ -25,6 +25,7 @@ Path: `GET /logout`
 ### Creating A Post
 
 Path: `POST /posts`
+
 Body (multipart/form-data): 
 ```
   status: string
