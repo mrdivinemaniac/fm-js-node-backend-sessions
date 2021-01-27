@@ -1,5 +1,6 @@
 const express = require('express')
 const router = require('./routes')
+// TODO: use process.env + add to config
 const port = '3000'
 
 const app = express()
