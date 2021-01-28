@@ -28,7 +28,10 @@ const upload = multer({
       file.mimetype.startsWith('text/') ||
       ['application/javascript', 'application/json'].includes(file.mimetype)
     )
-    if (!fileIsValid) cb(new InvalidFileError('Uploaded file must be a text file'))
+    if (!fileIsValid) {
+      console.info(`Unsupported file type uploaded: ${file.mimetype}`)
+      cb(new InvalidFileError('Uploaded file must be a text file'))
+    }
     else cb(null, true)
   }
 })
@@ -40,12 +43,15 @@ router.post('/posts', upload.single('codeFile'), (req, res) => {
     res.render('index', { error: 'message is required' })
     return
   }
-  res.json({
+  const createdDummyPost = {
     id: uuid.v4(),
     message: req.body.message,
-    codeFilePath: req.file.filename,
+    codeFilePath: req.file ? req.file.filename : null,
     likes: 0
-  })
+  }
+  console.log('New Post Created!')
+  console.dir(createdDummyPost)
+  res.json(createdDummyPost)
 })
 
 // Bikash
