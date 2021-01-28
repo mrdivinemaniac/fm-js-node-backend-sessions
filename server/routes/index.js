@@ -64,7 +64,7 @@ router.post('/stream-upload', (req, res) => {
 // Error handler
 router.use((err, req, res, next) => {
   if (err instanceof InvalidFileError) {
-    res.status(400).send({ error: err.message })
+    res.status(400).json({ error: err.message })
   } else {
     next(err)
   }
