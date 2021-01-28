@@ -1,7 +1,6 @@
 const express = require('express')
 const router = require('./routes')
-// TODO: use process.env + add to config
-const port = '3000'
+const config = require('./config')
 
 const app = express()
 
@@ -13,5 +12,5 @@ app.use(express.static('./public'))
 app.use('/', router)
 
 app.listen(port, () => {
-   console.log(`Listening on port ${port}`)
+   console.log(`Listening on port ${config.PORT}`)
 })
