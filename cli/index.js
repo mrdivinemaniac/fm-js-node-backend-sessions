@@ -14,6 +14,7 @@ function requireModuleForCommand (command) {
   } catch (e) {
     console.error(`Error: ${e.message}`)
     console.log(getSupportedCommands())
+    return
   }
   require(modulePath)
 }

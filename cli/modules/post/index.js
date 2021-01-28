@@ -1,7 +1,7 @@
 const yargs = require('yargs')
 const http = require('http')
 const fs = require('fs')
-const config = require('../config')
+const config = require('../../config')
 const fetch = require('node-fetch')
 const FormData = require('form-data')
 
@@ -29,7 +29,7 @@ async function main (args) {
 
 function validateFile (filePath) {
   return new Promise((resolve, reject) => {
-    // Callbacks: also show fs.readdir (not sync)
+    // NOTE: also show fs.readdir (not sync) and explain callback structure
     fs.access(filePath, fs.constants.F_OK | fs.constants.R_OK, err => {
       if (err) reject(`Cannot access file ${filePath} `)
       else resolve()
@@ -50,6 +50,8 @@ function requestCreatePost (message, filePath) {
 }
 
 function requestStreamCreatePost (message, filePath) {
+  // NOTE: go to slides and explain streams
+  // NOTE: explain EventEmitterAPI
   return new Promise((resolve, reject) => {
     const fileStream = filePath ? fs.createReadStream(filePath) : null
     const options = {
@@ -58,11 +60,13 @@ function requestStreamCreatePost (message, filePath) {
       path: '/stream-upload',
       method: 'POST'
     }
+    // NOTE: req is a stream
     const req = http.request(
       options,
       res => {
+        // NOTE: res is a stream
         res.on('data', data => {
-          // data is a buffer
+          // NOTE: data is a buffer
           resolve(data.toString())
         })
         res.on('error', e => {
