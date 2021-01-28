@@ -6,6 +6,7 @@
 <body>
 
 <div>
+  <%= typeof error != 'undefined' ? error : '' %>
   <form action="/posts" method="POST" enctype="multipart/form-data">
     <b>File Upload:</b>
     <input type="file" name="codeFile" />

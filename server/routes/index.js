@@ -9,8 +9,7 @@ class InvalidFileError extends Error {}
 const router = express.Router()
 
 router.get('/', (req, res) => {
-  // TODO: pass variables
-  res.render('index')
+  res.render('index' )
 })
 
 const storage = multer.diskStorage({
@@ -38,7 +37,7 @@ const upload = multer({
 router.post('/posts', upload.single('codeFile'), (req, res) => {
   console.log('Received posts request')
   if (!req.body.message) {
-    res.status(400).send({ error: 'message is required' })
+    res.render('index', { error: 'message is required' })
     return
   }
   res.json({
