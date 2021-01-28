@@ -28,7 +28,7 @@ Path: `POST /posts`
 
 Body (multipart/form-data): 
 ```
-  status: string
+  message: string
   codeFile: file
 ```
 
@@ -36,7 +36,8 @@ Response (JSON):
 ```
 {
   id: string,
-  codeFilePath: string,
+  message: string,
+  codeFileName: string,
   likes: number
 }
 ```
@@ -48,7 +49,8 @@ Response (JSON):
 ```
 {
   id: string,
-  codeFilePath: string,
+  message: string,
+  codeFileName: string,
   user: {
     id: string,
     username: string
@@ -65,7 +67,8 @@ Response (JSON):
 {
   posts: Array<{
     id: string,
-    codeFilePath: string,
+    message: string,
+    codeFileName: string,
     likes: number
   }>,
   meta: {
