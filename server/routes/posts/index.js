@@ -46,6 +46,7 @@ router.post('/', upload.single('codeFile'), async (req, res, next) => {
     // More on this later when we learn about streams
     if (!req.body.message) {
       res.status(400).send({ error: 'message is required' })
+      // NOTE: uncomment to show errors
       // res.render('index', { error: 'message is required' })
       return
     }
