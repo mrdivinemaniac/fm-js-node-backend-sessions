@@ -1,11 +1,11 @@
 const uuid = require("uuid")
 
-function createPost (message, codeFilePath) {
+function createPost (message, codeFileName) {
   // NOTE: Mention that we will add this to db in a later session
   const createdDummyPost = {
     id: uuid.v4(),
     message,
-    codeFilePath,
+    codeFileName,
     likes: 0
   }
   console.log('New Post Created!')

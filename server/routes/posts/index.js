@@ -3,13 +3,14 @@ const multer = require('multer')
 const path = require('path')
 const uuid = require('uuid')
 const crud = require('./crud')
+const config = require('../../config')
 
 class InvalidFileError extends Error {}
 
 const router = express.Router()
 
 const storage = multer.diskStorage({
-  destination: './public/uploads',
+  destination: path.join(config.PUBLIC_PATH, 'uploads'),
   filename: (req, file, cb) => {
     cb(null, file.fieldname + '-' + Date.now() + uuid.v4() + path.extname(file.originalname))
   }
@@ -50,7 +51,7 @@ router.post('/', upload.single('codeFile'), async (req, res, next) => {
     }
     const createdPost = await crud.createPost(
       req.body.message,
-      req.file ? req.file.path : null
+      req.file ? req.file.filename : null
     )
     res.json(createdPost)
   } catch (e) {
