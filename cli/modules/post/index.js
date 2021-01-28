@@ -20,7 +20,7 @@ yargs
 
 async function main ({ file, message }) {
   if (file) await validateFile(file)
-  const response = requestCreatePost(message, file)
+  const response = await requestCreatePost(message, file)
   if (response.error) throw new Error(response.error)
   else console.log(`New post created with id ${response.id}`)
 }
