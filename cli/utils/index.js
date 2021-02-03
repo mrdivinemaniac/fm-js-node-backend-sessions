@@ -6,15 +6,15 @@ const config = require('../config')
 const DATA_FILE_PATH = path.join(__dirname, '../', 'data')
 
 function saveToken (token) {
-  
+  // TODO: save the token somewhere
 }
 
 function readToken () {
-  
+  // TODO: read the token from the saved location
 }
 
 function deleteToken () {
-  
+  // TODO: delete the currently saved token
 }
 
 function requestApi (apiPath, ...rest) {

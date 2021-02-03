@@ -8,6 +8,7 @@ async function main () {
   const { error, token } = await requestToken(username, password)
   if (error) throw new Error(error)
   saveToken(token)
+  console.log('Logged in successfully')
 }
 
 async function requestToken (username, password) {
