@@ -1,7 +1,7 @@
 ## REST API
 
 ### Login
-Path: `POST /login`
+Path: `POST /auth/token`
 Body (JSON):
 ```
 {
@@ -20,7 +20,7 @@ Response (JSON):
 All other requests require the `Authorization` header to have the value: `Bearer <token>`
 
 ### Logout
-Path: `GET /logout`
+Path: `GET /auth/revoke`
 
 ### Creating A Post
 
