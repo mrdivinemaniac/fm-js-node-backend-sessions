@@ -67,6 +67,16 @@ router.get('/', async (req, res, next) => {
   }
 })
 
+router.delete('/:id', async (req, res, next) => {
+  try {
+    const { id } = req.params
+    const deletedPost = await crud.deletePost(id)
+    res.json(deletedPost)
+  } catch (e) {
+    next(e)
+  }
+})
+
 router.use((err, req, res, next) => {
   if (err instanceof InvalidFileError) {
     res.status(400).json({ error: err.message})

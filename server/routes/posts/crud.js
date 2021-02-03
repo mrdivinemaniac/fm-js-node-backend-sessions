@@ -31,8 +31,17 @@ function getPosts (limit = undefined) {
   return Promise.resolve(posts) 
 }
 
+function deletePost (id) {
+  console.log(`Deleting Posts with id ${id}...`)
+  const posts = samplePosts.filter(post => post.id !== Number(id))
+  console.log({ posts })
+  return Promise.resolve('Deleted') 
+}
+
+
 module.exports = {
   createPost,
   getPost,
-  getPosts
+  getPosts,
+  deletePost
 }
