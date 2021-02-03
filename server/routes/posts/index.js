@@ -43,6 +43,30 @@ router.post('/', upload.single('codeFile'), async (req, res, next) => {
   }
 })
 
+router.get('/:id', async (req, res, next) => {
+  try {
+    console.log({ paprams: req.params })
+    if(!req.params.id) {
+      res.status(400).send({ error: 'Id not specified' })
+      return
+    }
+    const retrievedPost = await crud.getPost(req.params.id)
+    res.json(retrievedPost)
+  } catch (e) {
+    next(e)
+  }
+})
+
+router.get('/', async (req, res, next) => {
+  try {
+    const { limit } = req.query
+    const posts = await crud.getPosts(limit)
+    res.json(posts)
+  } catch (e) {
+    next(e)
+  }
+})
+
 router.use((err, req, res, next) => {
   if (err instanceof InvalidFileError) {
     res.status(400).json({ error: err.message})
