@@ -1,8 +1,7 @@
 const yargs = require('yargs')
 const fs = require('fs')
-const fetch = require('node-fetch')
 const FormData = require('form-data')
-const config = require('../../config')
+const { requestAuthenticatedApi } = require('../../utils')
 
 yargs
   .command('post <message>', 'Creates a post', yargs => {
@@ -41,7 +40,7 @@ async function requestCreatePost (message, filePath) {
     form.append('codeFile', fs.createReadStream(filePath))
   }
 
-  const res = await fetch(`${config.apiHost}/posts`, {
+  const res = await requestAuthenticatedApi(`posts`, {
     method: 'POST',
     body: form
   })
