@@ -77,6 +77,17 @@ router.delete('/:id', async (req, res, next) => {
   }
 })
 
+router.patch('/:id', async (req, res, next) => {
+  try {
+    const { id } = req.params
+    console.log({ rew: req.body })
+    const updatedPost = await crud.updatePost(id, req.body)
+    res.json(updatedPost)
+  } catch (e) {
+    next(e)
+  }
+})
+
 router.use((err, req, res, next) => {
   if (err instanceof InvalidFileError) {
     res.status(400).json({ error: err.message})

@@ -33,9 +33,16 @@ function getPosts (limit = undefined) {
 
 function deletePost (id) {
   console.log(`Deleting Posts with id ${id}...`)
-  const posts = samplePosts.filter(post => post.id !== Number(id))
+  const posts = samplePosts.filter(post => post.id === Number(id))
   console.log({ posts })
   return Promise.resolve('Deleted') 
+}
+
+function updatePost (id, body) {
+  console.log(`Updating Posts with id ${id}...`)
+  const updatedSamplePosts = samplePosts.map(post => post.id === Number(id) ? { ...post, ...body } : post)
+  const updatedPost = updatedSamplePosts.find(post => post.id === Number(id))
+  return Promise.resolve(updatedPost) 
 }
 
 
@@ -43,5 +50,6 @@ module.exports = {
   createPost,
   getPost,
   getPosts,
+  updatePost,
   deletePost
 }
