@@ -18,8 +18,13 @@ router.post('/token', express.json(), async (req, res, next) => {
   }
 })
 
-router.get('/revoke', (req, res) => {
-  revokedTokens.revokeToken()
+router.get('/revoke', async (req, res, next) => {
+  try {
+    // TODO: somehow get the token from the request and revoke it
+    await revokedTokens.revokeToken()
+  } catch (e) {
+    next(e)
+  }
 })
 
 module.exports = router
