@@ -1,7 +1,8 @@
 const express = require('express')
 const multer = require('multer')
 const uuid = require('uuid')
-const crud = require('./crud')
+const postsModel = require('../../models/posts')
+const likesRouter = require('./likes')
 
 const router = express.Router()
 
@@ -33,13 +34,45 @@ router.post('/', upload.single('codeFile'), async (req, res, next) => {
       res.status(400).send({ error: 'Message field is required.' })
       return
     }
-      const createdPost = await crud.createPost(
+      const createdPost = await postsModel.createPost(
       req.body.message,
         req.file ? req.file.filename : null
       )
     res.json(createdPost)
   } catch (e) {
       next(e)
+  }
+})
+
+router.get('/:id', async (req, res, next) => {
+  try {
+    
+  } catch (e) {
+    next(e)
+  }
+})
+
+router.get('/', async (req, res, next) => {
+  try {
+
+  } catch (e) {
+    next(e)
+  }
+})
+
+router.delete('/:id', async (req, res, next) => {
+  try {
+    
+  } catch (e) {
+    next(e)
+  }
+})
+
+router.patch('/:id', upload.single('codeFile'), async (req, res, next) => {
+  try {
+
+  } catch (e) {
+    next(e)
   }
 })
 
@@ -50,5 +83,8 @@ router.use((err, req, res, next) => {
     next(err)
   }
 })
+
+// TODOS Figure out how to retrieve postId in likesRouter
+router.use('/:postId/likes', likesRouter)
 
 module.exports = router

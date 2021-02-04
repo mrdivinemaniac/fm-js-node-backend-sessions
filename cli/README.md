@@ -2,6 +2,10 @@ This is the command line client for the application.
 
 ## The CLI API
 
+### Signup
+`cli signup`
+The user will receive a prompt for username and password
+
 ### Login
 `cli login`
 The user will receive a prompt for username and password
