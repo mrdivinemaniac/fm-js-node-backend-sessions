@@ -1,5 +1,23 @@
 ## REST API
 
+### Signup
+Path: `POST /auth/signup`
+Body (JSON):
+```
+{
+  username: string,
+  password: string
+}
+```
+
+Response (JSON):
+```
+{
+  id: string,
+  username: string
+}
+```
+
 ### Login
 Path: `POST /auth/token`
 Body (JSON):
