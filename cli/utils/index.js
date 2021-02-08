@@ -10,11 +10,23 @@ function saveToken (token) {
 }
 
 function readToken () {
+  if (!canUserAccessDataFile()) return null
   return fs.readFileSync(DATA_FILE_PATH)
 }
 
 function deleteToken () {
+  if (!canUserAccessDataFile()) return
   return fs.unlinkSync(DATA_FILE_PATH)
+}
+
+function canUserAccessDataFile () {
+  try {
+    // accessSync will return undefined on success and throw on failure
+    fs.accessSync(DATA_FILE_PATH)
+    return true
+  } catch (e) {
+    return false
+  }
 }
 
 function requestApi (apiPath, ...rest) {
