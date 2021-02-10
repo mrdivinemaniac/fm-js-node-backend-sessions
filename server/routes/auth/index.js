@@ -1,4 +1,5 @@
 const express = require('express')
+const { checkAuth } = require('../../middleware')
 const revokedTokens = require('../../models/revoked-tokens')
 const users = require('../../models/users')
 const security = require('../../security')
@@ -18,10 +19,11 @@ router.post('/token', express.json(), async (req, res, next) => {
   }
 })
 
-router.get('/revoke', async (req, res, next) => {
+router.get('/revoke', checkAuth(), async (req, res, next) => {
   try {
-    // TODO: somehow get the token from the request and revoke it
-    await revokedTokens.revokeToken()
+    await revokedTokens.revokeToken(req.authorization.token)
+    console.log(`Successfully Revoked Token ${req.authorization.token}`)
+    res.send()
   } catch (e) {
     next(e)
   }

@@ -6,15 +6,27 @@ const config = require('../config')
 const DATA_FILE_PATH = path.join(__dirname, '../', 'data')
 
 function saveToken (token) {
-  // TODO: save the token somewhere
+  return fs.writeFileSync(DATA_FILE_PATH, token)
 }
 
 function readToken () {
-  // TODO: read the token from the saved location
+  if (!canUserAccessDataFile()) return null
+  return fs.readFileSync(DATA_FILE_PATH)
 }
 
 function deleteToken () {
-  // TODO: delete the currently saved token
+  if (!canUserAccessDataFile()) return
+  return fs.unlinkSync(DATA_FILE_PATH)
+}
+
+function canUserAccessDataFile () {
+  try {
+    // accessSync will return undefined on success and throw on failure
+    fs.accessSync(DATA_FILE_PATH)
+    return true
+  } catch (e) {
+    return false
+  }
 }
 
 function requestApi (apiPath, ...rest) {
