@@ -34,11 +34,11 @@ router.post('/', upload.single('codeFile'), async (req, res, next) => {
       res.status(400).send({ error: 'Message field is required.' })
       return
     }
-      const createdPost = await postsModel.createPost(
-      req.body.message,
-        req.file ? req.file.filename : null
-      )
-    res.json(createdPost)
+    const createdPost = await postsModel.createPost(
+    req.body.message,
+      req.file ? req.file.filename : null
+    )
+    res.status(201).json(createdPost)
   } catch (e) {
       next(e)
   }
