@@ -26,3 +26,16 @@ process.on('unhandledRejection', err => {
   logger.error('Unhandled Rejection!', err)
   process.exit(1)
 })
+
+function cleanup (cb) {
+  logger.info('Closing Server...')
+  server.close(() => {
+    logger.info('Server Closed')
+    cb()
+  })
+}
+
+process.on('SIGTERM', () => {
+  logger.info('Graceful Shutdown Initiated')
+  cleanup(() => process.exit(0))
+})
