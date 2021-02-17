@@ -3,6 +3,9 @@ const multer = require('multer')
 const uuid = require('uuid')
 const postsModel = require('../../models/posts')
 const likesRouter = require('./likes')
+const { createLogger } = require('../../logger')
+
+const logger = createLogger('routes/posts')
 
 const router = express.Router()
 
@@ -23,7 +26,7 @@ const upload = multer({
     )
     if (!fileIsValid) {
       console.log(`Unsupported file type uploaded ${file.mimetype}`)
-      cb(new InvalidFileError('Upload file must be a text file'))
+      cb(new Error('Upload file must be a text file'))
     } else cb(null, true)
   }
 })
@@ -31,9 +34,11 @@ const upload = multer({
 router.post('/', upload.single('codeFile'), async (req, res, next) => {
   try {
     if(!req.body.message) {
+      logger.debug('User did not specify message. Responding with 400')
       res.status(400).send({ error: 'Message field is required.' })
       return
     }
+    logger.info('Post created')
     const createdPost = await postsModel.createPost(
     req.body.message,
       req.file ? req.file.filename : null

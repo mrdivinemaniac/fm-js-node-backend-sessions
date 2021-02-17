@@ -1,45 +1,47 @@
 const uuid = require('uuid')
+const { createLogger } = require('../../logger')
+
+const logger = createLogger('models/posts')
 
 const samplePosts = [...Array(5).keys()].map(i => {
   return {
-      id: i + 1,
-      message: `This is message ${i + 1}`
+    id: i + 1,
+    message: `This is message ${i + 1}`
   }
 })
 
 function createPost (message, codeFileName) {
- console.log('Creating Post...')
- const dummyCreatedPost = {
+  logger.debug('Creating Post...')
+  const dummyCreatedPost = {
     id: uuid.v4(),
     message,
     codeFileName,
     like: 0
   }
-  console.log('New post created', dummyCreatedPost)
+  logger.info('New post created:', dummyCreatedPost)
   return Promise.resolve(dummyCreatedPost) 
 }
 
 function getPost (id) {
-  console.log(`Retrieving Post with id ${id}...`)
+  logger.debug(`Retrieving Post with id ${id}...`)
   const retrievedPost = samplePosts.find(post => post.id == id)
   return Promise.resolve(retrievedPost) 
 }
 
 function getPosts (limit = undefined) {
-  console.log('Retrieving Posts...')
+  logger.debug('Retrieving Posts...')
   const posts = samplePosts.filter((post,i) => limit ? i <= (limit - 1) : post)
   return Promise.resolve(posts) 
 }
 
 function deletePost (id) {
-  console.log(`Deleting Posts with id ${id}...`)
+  logger.info(`Deleting Posts with id ${id}...`)
   const posts = samplePosts.filter(post => post.id === Number(id))
-  console.log({ posts })
   return Promise.resolve('Deleted') 
 }
 
 function updatePost (id, message, codeFileName) {
-  console.log(`Updating Posts with id ${id}...`)
+  logger.info(`Updating Posts with id ${id}...`)
   const updateObject = {}
   if (message) updateObject.message = message
   if (codeFileName) updateObject.codeFileName = codeFileName
