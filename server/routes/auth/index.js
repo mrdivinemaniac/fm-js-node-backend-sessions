@@ -3,6 +3,9 @@ const { checkAuth } = require('../../middleware')
 const revokedTokens = require('../../models/revoked-tokens')
 const users = require('../../models/users')
 const security = require('../../security')
+const { createLogger } = require('../../logger')
+
+const logger = createLogger('routes/auth')
 
 const router = express.Router()
 
@@ -24,6 +27,23 @@ router.get('/revoke', checkAuth(), async (req, res, next) => {
     await revokedTokens.revokeToken(req.authorization.token)
     console.log(`Successfully Revoked Token ${req.authorization.token}`)
     res.send()
+  } catch (e) {
+    next(e)
+  }
+})
+
+router.post('/signup', express.json(), async (req, res, next) => {
+  const { username, email, password } = req.body
+  logger.debug('New Signup Request Received', req.body)
+  if (!username || !email || !password) {
+    return res.status(400).json({ error: 'username, email and password are required' })
+  }
+  // TODO: Add Validation for fields using something like joi
+  try {
+    const createdUser = await users.createUser(email, username, password)
+    logger.info('Created new user', { id: createdUser.id, username, email })
+    const response = { ...createdUser, password: undefined }
+    res.json(response)
   } catch (e) {
     next(e)
   }
