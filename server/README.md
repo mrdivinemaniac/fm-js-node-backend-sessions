@@ -5,6 +5,7 @@ Path: `POST /auth/signup`
 Body (JSON):
 ```
 {
+  email: string,
   username: string,
   password: string
 }
@@ -14,6 +15,7 @@ Response (JSON):
 ```
 {
   id: string,
+  email: string,
   username: string
 }
 ```
