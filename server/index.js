@@ -10,6 +10,7 @@ const app = express()
 app.use('/', routes)
 
 app.use((err, req, res, next) => {
+  logger.error(err.stack)
   res.status(500).json({ error: 'Unknown error occurred' })
 })
 
