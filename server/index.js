@@ -2,12 +2,17 @@ const express = require('express')
 const config = require('./config')
 const routes = require('./routes')
 const { createLogger } = require('./logger')
+const Sentry = require('@sentry/node')
 
 const logger = createLogger('index')
 
 const app = express()
 
+Sentry.init({ dsn: 'DSN_KEY'})
+
+app.use(Sentry.Handlers.requestHandler())
 app.use('/', routes)
+app.use(Sentry.Handlers.errorHandler())
 
 app.use((err, req, res, next) => {
   res.status(500).json({ error: 'Unknown error occurred' })
