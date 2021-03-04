@@ -14,9 +14,12 @@ async function main () {
 async function requestToken (username, password) {
   const res = await requestApi('auth/token', {
     method: 'POST',
-    body: {
+    body: JSON.stringify({
       username,
       password
+    }),
+    headers: {
+      'Content-Type': 'application/json'
     }
   })
   return res.json()
@@ -27,12 +30,13 @@ function promptCredentials () {
   prompt.start()
   return prompt.get({
     properties: {
-      name: {
+      username: {
         required: true
       },
       password: {
         required: true,
-        hidden: true
+        hidden: true,
+        replace: '🤐'
       }
     }
   })

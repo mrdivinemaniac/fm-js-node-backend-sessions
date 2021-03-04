@@ -12,6 +12,17 @@ function findUserByCredentials (username, password) {
   })
 }
 
+function createUser (email, username, password) {
+  // TODO: Insert into Database
+  return Promise.resolve({
+    id: uuid.v4(),
+    email,
+    username,
+    password
+  })
+}
+
 module.exports = {
-  findUserByCredentials
+  findUserByCredentials,
+  createUser
 }
