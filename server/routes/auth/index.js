@@ -45,7 +45,11 @@ router.post('/signup', express.json(), async (req, res, next) => {
     const response = { ...createdUser, password: undefined }
     res.json(response)
   } catch (e) {
-    next(e)
+    if (e instanceof users.UserAlreadyExistsError) {
+      res.status(400).send({ error: 'A User with that email or username already exists' })
+    } else {
+      next(e)
+    }
   }
 })
 
