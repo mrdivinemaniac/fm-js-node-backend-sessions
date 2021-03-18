@@ -5,6 +5,13 @@ const { checkAuth } = require('../middleware')
 
 const router = express.Router()
 
+router.use('/health', (req, res) => {
+  res.json({
+    status: 'ok',
+    message: `I'm doing alright! Thanks!`
+  })
+})
+
 router.use('/posts', checkAuth(), postRouter)
 router.use('/auth', authRouter)
 
