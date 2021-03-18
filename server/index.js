@@ -8,11 +8,11 @@ const logger = createLogger('index')
 
 const app = express()
 
-Sentry.init({ dsn: 'DSN_KEY'})
+// Sentry.init({ dsn: 'DSN_KEY'})
 
-app.use(Sentry.Handlers.requestHandler())
+// app.use(Sentry.Handlers.requestHandler())
 app.use('/', routes)
-app.use(Sentry.Handlers.errorHandler())
+// app.use(Sentry.Handlers.errorHandler())
 
 app.use((err, req, res, next) => {
   logger.error(err.stack)
