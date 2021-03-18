@@ -9,8 +9,8 @@ if [ $CURRENT_BRANCH != "main" ]; then
 fi
 
 # Clean the working tree
-echo "1. Cleaning the working tree."
-git stash
+echo "1. Pulling latest code"
+git pull origin main
 
 # Increment version number
 echo "2. Incrementing major version"
@@ -22,5 +22,3 @@ git push heroku main
 
 echo "4. Pushing to Git"
 git push origin main
-
-echo "NOTE: If you were working on something, use git stash pop to get your work back"
